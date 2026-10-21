@@ -113,8 +113,11 @@ function send(res, entry) {
     headers['content-security-policy'] = CSP;
     // BetterPitch copy is swapped in on the client (betterpitch/content.js) so the
     // recorded markup and RSC payloads stay byte-identical.
-    // The home page's first section is added the same way (betterpitch/hero.js).
-    body = body.replace('</head>', '<script src="/__bp/content.js"></script><script src="/__bp/hero.js"></script></head>');
+    // The home page's first section (hero.js), the colour theme (theme.css) and the
+    // design layer (polish.css/js: type, surfaces, hovers, reveals, smooth scroll)
+    // are added the same way.
+    body = body.replace('</head>', '<link rel="stylesheet" href="/__bp/theme.css"><link rel="stylesheet" href="/__bp/polish.css"><script src="/__bp/content.js"></script>'
+      + '<script src="/__bp/hero.js"></script><script src="/__bp/lenis.js" defer></script><script src="/__bp/polish.js" defer></script></head>');
   }
   res.writeHead(entry.status, headers);
   res.end(body);
@@ -123,10 +126,19 @@ function send(res, entry) {
 http.createServer((req, res) => {
   const u = new URL(req.url, 'http://localhost');
   // Analytics endpoints (PostHog proxy) - answer with an empty success so nothing errors.
-  const BP = { '/__bp/content.js': 'application/javascript', '/__bp/hero.js': 'application/javascript', '/__bp/hero.css': 'text/css' };
-  if (BP[u.pathname]) {
-    res.writeHead(200, { 'content-type': BP[u.pathname], 'cache-control': 'no-cache' });
-    return res.end(fs.readFileSync(path.join(__dirname, 'betterpitch', path.basename(u.pathname))));
+  // BetterPitch layer: betterpitch/*.js|css, plus Lenis from node_modules (CDNs are blocked by the CSP).
+  if (u.pathname.startsWith('/__bp/')) {
+    const name = path.basename(u.pathname);
+    const file = name === 'lenis.js'
+      ? path.join(__dirname, 'node_modules', 'lenis', 'dist', 'lenis.min.js')
+      : path.join(__dirname, 'betterpitch', name);
+    const type = { '.js': 'application/javascript', '.css': 'text/css' }[path.extname(name)];
+    if (!type || !fs.existsSync(file)) {
+      res.writeHead(404, { 'content-type': 'text/plain' });
+      return res.end('Not found: ' + u.pathname);
+    }
+    res.writeHead(200, { 'content-type': type, 'cache-control': 'no-cache' });
+    return res.end(fs.readFileSync(file));
   }
   if (u.pathname.startsWith('/ingest')) {
     res.writeHead(200, { 'content-type': 'application/json' });

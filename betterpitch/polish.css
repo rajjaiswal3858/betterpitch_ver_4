@@ -1,0 +1,116 @@
+/* BetterPitch design layer, loaded on every page by server.js. It changes only
+   visual design and motion: type setting, surfaces, hover/focus/press states and
+   scroll reveals. No section is added, removed or moved. polish.js adds the
+   classes used here (bp-btn, bp-rv, ...) after React hydrates. See DESIGN.md.
+   Motion verb: "rise like a voice" - things rise from a baseline and settle. */
+:root{
+  --bp-ink:#13201b;
+  --bp-muted:#5c6661;
+  --bp-line:rgba(19,32,27,.09);
+  --bp-accent:#0f6b4f;   /* emerald, the theme's primary-800 (theme.css) */
+  --bp-deep:#0b3b2e;     /* CTA fill */
+  --bp-signal:#0f6b4f;   /* focus ring */
+  --bp-ease:cubic-bezier(.16,1,.3,1);
+  --bp-ease-soft:cubic-bezier(.165,.84,.44,1);
+}
+@property --bp-r{syntax:'<length-percentage>';inherits:false;initial-value:0%}
+
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+::selection{background:#f1e2a8;color:#0b3b2e}
+#page-scroller{scrollbar-width:thin;scrollbar-color:rgba(15,107,79,.4) transparent}
+
+/* ---- type ---- */
+/* display: tighter tracking and leading, balanced lines, no widows */
+main h1,main h2,footer h2{text-wrap:balance;font-kerning:normal;font-feature-settings:"kern","liga"}
+main h1[class*="heading-"],main h2[class*="heading-"],footer h2[class*="heading-"]{letter-spacing:-.034em;line-height:1.03}
+main h3.font-intrinseca,main h3[class*="heading-"],main p.font-intrinseca{letter-spacing:-.024em;text-wrap:balance}
+main p,footer p{text-wrap:pretty}
+/* the one uppercase label ("Trusted by ...") reads as a quiet caption */
+main p.uppercase{font-size:13px;letter-spacing:.16em;color:var(--bp-muted)}
+/* figures line up in stats and counters */
+main [class*="heading-large"],main [class*="heading-xlarge"],.bph-len{font-variant-numeric:tabular-nums lining-nums}
+
+/* ---- surfaces ---- */
+/* white cards: hairline edge and a soft two-layer shadow instead of a flat box */
+/* (polish.js tags card-sized boxes only, never the big section panels) */
+.bp-card{box-shadow:0 0 0 1px var(--bp-line),0 1px 2px rgba(10,30,22,.04),0 14px 34px -22px rgba(11,59,46,.2);
+  transition:box-shadow .5s var(--bp-ease-soft)}
+@media (hover:hover){
+  .bp-card:has(a,button):hover{box-shadow:0 0 0 1px rgba(15,107,79,.2),0 2px 4px rgba(10,30,22,.05),0 28px 50px -26px rgba(15,107,79,.42)}
+}
+
+/* ---- buttons ---- */
+/* Primary and secondary buttons fill from the point the pointer enters, like a
+   voice filling a room (polish.js sets --bp-x/--bp-y). */
+.bp-btn{position:relative;isolation:isolate;
+  background-image:radial-gradient(circle at var(--bp-x,50%) var(--bp-y,50%),var(--bp-fill,var(--bp-deep)) var(--bp-r),transparent calc(var(--bp-r) + .5px));
+  transition:--bp-r .6s var(--bp-ease-soft),color .35s var(--bp-ease-soft),border-color .35s,box-shadow .35s,scale .2s var(--bp-ease-soft)!important}
+.bp-btn.bp-ghost{--bp-fill:var(--bp-ink)}
+.bp-btn.bp-light{--bp-fill:#e3f1ea}
+.bp-btn > svg:last-child{transition:translate .45s var(--bp-ease)}
+@media (hover:hover){
+  .bp-btn:hover{--bp-r:160%}
+  .bp-btn.bp-ghost:hover{color:#fff!important;border-color:var(--bp-ink)!important}
+  .bp-btn.bp-ghost:hover *{color:inherit!important}
+  .bp-btn.bp-solid:hover{box-shadow:0 14px 30px -14px rgba(15,107,79,.7)}
+  .bp-btn:hover > svg:last-child{translate:4px 0}
+}
+.bp-btn:focus-visible{--bp-r:160%}
+.bp-btn.bp-ghost:focus-visible{color:#fff!important}
+.bp-btn:active{scale:.97}
+
+/* small pill buttons ("Case study") and icon arrows nudge along their direction */
+@media (hover:hover){
+  .bp-pill > svg:last-child{transition:translate .45s var(--bp-ease)}
+  .bp-pill:hover > svg:last-child{translate:3px 0}
+  .bp-pill:hover{box-shadow:0 0 0 1px rgba(15,107,79,.25),0 6px 16px -8px rgba(15,107,79,.45)}
+}
+.bp-pill{transition:box-shadow .35s var(--bp-ease-soft),scale .2s!important}
+.bp-pill:active{scale:.97}
+
+/* ---- links ---- */
+/* nav and footer links: an underline draws in from the left */
+.bp-draw{background:linear-gradient(currentColor 0 0) left 100% / 0% 1px no-repeat;transition:background-size .45s var(--bp-ease-soft),color .3s!important;padding-bottom:1px}
+@media (hover:hover){.bp-draw:hover{background-size:100% 1px}}
+.bp-draw:focus-visible{background-size:100% 1px}
+
+/* ---- inputs ---- */
+main input[type="email"],main input[type="text"]{transition:border-color .3s,box-shadow .3s}
+main input[type="email"]:focus,main input[type="text"]:focus{outline:none;border-color:var(--bp-signal)!important;box-shadow:0 0 0 4px rgba(15,107,79,.16)}
+
+/* nav text links get a 24px+ tap target without moving anything */
+nav .bp-draw{padding-block:3px;margin-block:-3px}
+
+/* skip link: first tab stop, visible only when focused */
+.bp-skip{position:fixed;left:16px;top:12px;z-index:9999;padding:10px 16px;border-radius:999px;background:var(--bp-ink);color:#fff;font-size:14px;font-weight:500;
+  translate:0 -200%;transition:translate .3s var(--bp-ease)}
+.bp-skip:focus-visible{translate:none}
+
+/* ---- focus ---- */
+:where(a,button,[role="button"],[role="switch"],[tabindex]):focus-visible{outline:2px solid var(--bp-signal);outline-offset:3px}
+
+/* ---- scroll reveals: rise from a baseline ---- */
+.bp-rv-h{clip-path:inset(100% -.15em -.35em -.15em);translate:0 .35em;
+  transition:clip-path 1.1s var(--bp-ease),translate 1.1s var(--bp-ease)!important;transition-delay:var(--bp-d,0ms)!important}
+.bp-rv-h.bp-in{clip-path:inset(-.15em -.15em -.35em -.15em);translate:none}
+.bp-rv{opacity:0;translate:0 26px;
+  transition:opacity .8s var(--bp-ease),translate 1s var(--bp-ease)!important;transition-delay:var(--bp-d,0ms)!important}
+.bp-rv.bp-in{opacity:1;translate:none}
+
+/* page change: the new page settles in */
+@keyframes bpPageIn{from{opacity:0;translate:0 14px}to{opacity:1;translate:none}}
+main.bp-page-in{animation:bpPageIn .7s var(--bp-ease) both}
+
+/* ---- phones ---- */
+@media (max-width:640px){
+  main h1[class*="heading-"],main h2[class*="heading-"]{letter-spacing:-.028em;line-height:1.06}
+  .bp-rv{translate:0 18px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .bp-rv,.bp-rv-h{opacity:1!important;translate:none!important;clip-path:none!important;transition:none!important}
+  main.bp-page-in{animation:none}
+  .bp-btn,.bp-pill,.bp-draw{transition:none!important}
+  .bp-btn:hover > svg:last-child,.bp-pill:hover > svg:last-child{translate:none}
+  .bp-btn:active,.bp-pill:active{scale:none}
+}

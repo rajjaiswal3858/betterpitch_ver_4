@@ -1,10 +1,11 @@
 // Adds the voice-demo hero as the first section of the home page and pushes the
 // recorded page down under it. Animations and interactions are ported from the
-// betterpitch.vercel.app hero. Injected into every HTML page by server.js; only
-// acts on "/". Like content.js it waits for React to hydrate before touching the
-// DOM, otherwise React would throw the section away (hydration mismatch).
+// betterpitch.vercel.app hero. Injected into every HTML page by server.js; it is
+// shown only on "/", including after client-side navigation between pages. Like
+// content.js it waits for React to hydrate before touching the DOM, otherwise
+// React would throw the section away (hydration mismatch).
 (function () {
-  if (location.pathname !== '/') return;
+  const isHome = () => location.pathname === '/';
 
   const css = document.createElement('link');
   css.rel = 'stylesheet';
@@ -13,7 +14,7 @@
 
   const hide = document.createElement('style');
   hide.textContent = 'body{opacity:0!important}';
-  document.head.appendChild(hide);
+  if (isHome()) document.head.appendChild(hide);
 
   const ARROW = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>';
   const HTML = `
@@ -178,9 +179,14 @@
   }
 
   let sec = null;
-  function place() {
+  // Keeps the section first on the home page and takes it out on every other page.
+  function sync() {
+    if (!isHome()) {
+      if (sec && sec.isConnected) sec.remove();
+      return;
+    }
     const host = document.querySelector('main > div');
-    if (!host) return false;
+    if (!host) return;
     if (!sec) sec = build();
     // clear the fixed site header
     const nav = document.querySelector('#page-scroller nav');
@@ -188,19 +194,20 @@
     if (sec.parentNode !== host || host.firstChild !== sec) {
       host.insertBefore(sec, host.firstChild);
       sec._tiles();
+      // the entrance plays once; re-inserting the section later must not replay it
+      if (!sec.dataset.played) { sec.dataset.played = '1'; setTimeout(() => sec.classList.add('bph-played'), 2000); }
     }
-    return true;
   }
 
   let started = false;
   function start() {
     if (started) return;
     started = true;
-    if (place()) {
-      // keep it first if React re-renders the page container later
-      new MutationObserver(() => { if (!sec.isConnected || sec.parentNode.firstChild !== sec) place(); })
-        .observe(document.querySelector('main'), { childList: true, subtree: true });
-    }
+    sync();
+    // React swaps <main> on client-side navigation and may re-render the page container
+    new MutationObserver(() => {
+      if (isHome() ? !sec || !sec.isConnected || sec.parentNode.firstChild !== sec : sec && sec.isConnected) sync();
+    }).observe(document.body, { childList: true, subtree: true });
     hide.remove();
   }
   window.addEventListener('load', () => setTimeout(start, 300));

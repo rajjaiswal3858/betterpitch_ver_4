@@ -1,0 +1,104 @@
+/* BetterPitch colour theme: emerald & sand. Loaded on every page by server.js,
+   after the site's own CSS. The recorded site draws its colours from Tailwind
+   theme variables (--color-*, --gradient-*), so overriding them here recolours
+   every page without touching layout. Unlayered rules beat the site's @layer
+   rules. The block at the end recolours the utility classes that had purple
+   typed in directly (generated from the archived CSS with a purple-to-emerald
+   hue mapping). Product screenshots and illustrations are image files and keep
+   their own colours.
+   Palette: sand #F4F1EA, ink #13201B, emerald #0F6B4F, tint #DDEBE4,
+   deep #0B3B2E, gold #C9A227 (small details only). */
+:root,:host{
+  --color-primary-900:#0b3b2e;
+  --color-primary-800:#0f6b4f;
+  --color-primary-700:#2e7a62;
+  --color-primary-600:#3f8a71;
+  --color-primary-500:#78ae9b;
+  --color-primary-400:#a3c9bb;
+  --color-primary-300:#c6ded4;
+  --color-primary-200:#ddebe4;
+  --color-primary-100:#eaf3ee;
+  --color-primary-50:#f3f8f5;
+  --color-secondary-ivory:#eae4d6;
+  --color-secondary-light-ivory:#f4f1ea;
+  --color-lavender:#ddebe4;
+  --color-ivory:#eae4d6;
+  --color-purple-6:#0f6b4f0f;
+  --color-neutral-50:#eef0ee;
+  --color-neutral-100:#dce0dd;
+  --color-neutral-200:#c8cdca;
+  --color-neutral-300:#a9b0ac;
+  --color-neutral-400:#8e9692;
+  --color-neutral-500:#737c77;
+  --color-neutral-600:#5c6661;
+  --color-neutral-700:#45504b;
+  --color-neutral-800:#2f3b36;
+  --color-neutral-900:#1f2c27;
+  --color-neutral-950:#13201b;
+  --gradient-purple-vertical:linear-gradient(0deg,#ddebe4 -90.98%,#0b3b2e 48.61%);
+  --gradient-deep-gradient:linear-gradient(0deg,#ddebe4 -90.98%,#0b3b2e 79.56%);
+  --gradient-hero:linear-gradient(0deg,#f4f1ea 0%,#e2ede6 46.84%,#f4f1ea 100%);
+  --gradient-lavender-ivory:linear-gradient(0deg,#f1ede3 0%,#e2ede6 100%);
+  --gradient-ivory-lavender:linear-gradient(0deg,#e2ede6 0%,#f1ede3 100%);
+  --gradient-text:linear-gradient(270deg,#9fd8bf 0%,#9fd8bf 3.9%,#0f6b4f 17.76%,#9fd8bf 30.05%,#e8c766 45.89%,#c9a227 58.02%,#2e8b6a 65.5%,#0f6b4f 76.57%,#7fb8a2 89.53%,#7fb8a2 100%);
+}
+/* the big dark sections sit on the deep shade; buttons keep the brighter emerald */
+main section.bg-primary-800{background-color:#0b3b2e}
+
+/* ---- generated: hard-coded purple utilities, recoloured ---- */
+.border-\[\#764abd\]{border-color:#4b8870!important}
+.border-primary-200\/80{border-color:#e0ede7cc!important}
+.bg-\[\#7A08CC\]{background-color:#248564!important}
+.bg-\[\#CC089E\]{background-color:#248574!important}
+.bg-\[\#E4E1F3\]{background-color:#e0ede7!important}
+.bg-\[\#EDDCF4\]{background-color:#dcede8!important}
+.bg-\[\#eddcf4\]{background-color:#dcede8!important}
+.bg-primary-600\/10{background-color:#7caf9a1a!important}
+.bg-\[linear-gradient\(0deg\,\#8B63DA_0\%\,_rgba\(129\,87\,217\,0\.00\)_95\.11\%\)\]{background-image:linear-gradient(#70c09f00 4.89%,#7ac3a5 100%)!important}
+.bg-\[linear-gradient\(0deg\,\#9773CC_21\.07\%\,rgba\(142\,104\,198\,0\.85\)_38\.81\%\,rgba\(127\,84\,190\,0\)_96\.46\%\)\]{background-image:linear-gradient(#4f8c7400 3.54%,#7ab49dd9 61.19%,#84bba6 78.93%)!important}
+.bg-\[linear-gradient\(0deg\,\#F3EAFF_-90\.98\%\,\#4C12A1_59\.73\%\)\]{background-image:linear-gradient(#246b4f 40.27%,#e8faf3 190.98%)!important}
+.bg-\[linear-gradient\(0deg\,\#F3EAFF_-90\.98\%\,\#4C12A1_79\.56\%\)\]{background-image:linear-gradient(#246b4f 20.44%,#e8faf3 190.98%)!important}
+.bg-\[linear-gradient\(0deg\,\#FBF9F7_0\%\,\#F3EAFF_46\.84\%\,\#FBF9F7_100\%\)\]{background-image:linear-gradient(#fbf9f7 0%,#e8faf3 53.16%,#fbf9f7 100%)!important}
+.bg-\[linear-gradient\(180deg\,\#4c12a1_0\%\,\#7e57c2_100\%\)\]{background-image:linear-gradient(#246b4f 0%,#6bae93 100%)!important}
+.bg-\[linear-gradient\(180deg\,\#571cb0_0\%\,\#4c12a1_100\%\)\]{background-image:linear-gradient(#2d765a 0%,#246b4f 100%)!important}
+.bg-\[linear-gradient\(180deg\,\#E1CDFF_0\%\,\#F4EDFF_100\%\)\]{background-image:linear-gradient(#d1f4e6 0%,#eafaf4 100%)!important}
+.bg-\[radial-gradient\(125\%_75\%_at_50\%_100\%\,\#A66CFF_0\%\,rgba\(166\,108\,255\,0\.38\)_32\%\,rgba\(166\,108\,255\,0\)_64\%\)\,linear-gradient\(180deg\,\#4C12A1_0\%\,\#5B1AC1_60\%\,\#6321CC_100\%\)\]{background-image:radial-gradient(125% 75% at 50% 100%,#88e3bf 0%,#88e3bf61 32%,#88e3bf00 64%),linear-gradient(#246b4f 0%,#2e8160 60%,#348968 100%)!important}
+.bg-\[radial-gradient\(circle\,rgba\(255\,255\,255\,0\.55\)_0\%\,rgba\(255\,255\,255\,0\.12\)_24\%\,rgba\(193\,137\,255\,0\.35\)_46\%\,rgba\(193\,137\,255\,0\)_100\%\)\]{background-image:radial-gradient(circle,#ffffff8c 0%,#ffffff1f 24%,#9fe9cd59 46%,#9fe9cd00 100%)!important}
+.bg-\[radial-gradient\(circle_at_50\%_36\%\,\#cbb0f5_0\%\,\#8b52d6_58\%\,\#4c12a1_100\%\)\]{background-image:radial-gradient(circle at 50% 36%,#bde8d7 0%,#6bbd9e 58%,#246b4f 100%)!important}
+.bg-\[radial-gradient\(closest-side\,rgba\(151\,115\,204\,0\.5\)\,transparent\)\]{background-image:radial-gradient(closest-side,#84bba680,#0000)!important}
+.from-\[\#e1cdff\]{--tw-gradient-from:#d1f4e6!important;--tw-gradient-stops:var(--tw-gradient-via-stops,var(--tw-gradient-position),var(--tw-gradient-from)var(--tw-gradient-from-position),var(--tw-gradient-to)var(--tw-gradient-to-position))!important}
+.from-\[\#e8e4ff\]{--tw-gradient-from:#e3f8ef!important;--tw-gradient-stops:var(--tw-gradient-via-stops,var(--tw-gradient-position),var(--tw-gradient-from)var(--tw-gradient-from-position),var(--tw-gradient-to)var(--tw-gradient-to-position))!important}
+.from-\[\#f4edff\]{--tw-gradient-from:#eafaf4!important;--tw-gradient-stops:var(--tw-gradient-via-stops,var(--tw-gradient-position),var(--tw-gradient-from)var(--tw-gradient-from-position),var(--tw-gradient-to)var(--tw-gradient-to-position))!important}
+.to-\[\#a58be6\]{--tw-gradient-to:#9cd5bd!important;--tw-gradient-stops:var(--tw-gradient-via-stops,var(--tw-gradient-position),var(--tw-gradient-from)var(--tw-gradient-from-position),var(--tw-gradient-to)var(--tw-gradient-to-position))!important}
+.to-\[\#d1baf1\]{--tw-gradient-to:#c4e7d9!important;--tw-gradient-stops:var(--tw-gradient-via-stops,var(--tw-gradient-position),var(--tw-gradient-from)var(--tw-gradient-from-position),var(--tw-gradient-to)var(--tw-gradient-to-position))!important}
+.to-\[\#e1cdff\]{--tw-gradient-to:#d1f4e6!important;--tw-gradient-stops:var(--tw-gradient-via-stops,var(--tw-gradient-position),var(--tw-gradient-from)var(--tw-gradient-from-position),var(--tw-gradient-to)var(--tw-gradient-to-position))!important}
+.to-\[\#ece7f8\]{--tw-gradient-to:#e5f2ed!important;--tw-gradient-stops:var(--tw-gradient-via-stops,var(--tw-gradient-position),var(--tw-gradient-from)var(--tw-gradient-from-position),var(--tw-gradient-to)var(--tw-gradient-to-position))!important}
+.to-\[\#f3eaff\]{--tw-gradient-to:#e8faf3!important;--tw-gradient-stops:var(--tw-gradient-via-stops,var(--tw-gradient-position),var(--tw-gradient-from)var(--tw-gradient-from-position),var(--tw-gradient-to)var(--tw-gradient-to-position))!important}
+.to-\[\#f4edff\]{--tw-gradient-to:#eafaf4!important;--tw-gradient-stops:var(--tw-gradient-via-stops,var(--tw-gradient-position),var(--tw-gradient-from)var(--tw-gradient-from-position),var(--tw-gradient-to)var(--tw-gradient-to-position))!important}
+.text-\[\#896cbf\]{color:#7caf9a!important}
+.shadow-\[0_8px_32px_-8px_rgba\(76\,18\,161\,0\.08\)\]{--tw-shadow:0 8px 32px -8px var(--tw-shadow-color,#246b4f14)!important;box-shadow:var(--tw-inset-shadow),var(--tw-inset-ring-shadow),var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)!important}
+.\!ring-primary-200\/60{--tw-ring-color:#e0ede799!important}
+.\!ring-primary-200\/80{--tw-ring-color:#e0ede7cc!important}
+.hover\:bg-\[\#7A08CC\]\!:hover{background-color:#248564!important}
+.hover\:bg-\[\#CC089E\]\!:hover{background-color:#248574!important}
+.hover\:shadow-glass-hover:hover{--tw-shadow:inset 1px 1px 0 0 var(--tw-shadow-color,#fff6),inset -1px -1px 0 0 var(--tw-shadow-color,#ffffff1a),0 0 6px 1px var(--tw-shadow-color,#2eac7f61),0 0 14px 3px var(--tw-shadow-color,#2cb19347),0 0 22px 5px var(--tw-shadow-color,#f2c6772e),0 0 32px 8px var(--tw-shadow-color,#b5e9d624)!important;box-shadow:var(--tw-inset-shadow),var(--tw-inset-ring-shadow),var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)!important}
+.focus-visible\:shadow-glass-hover:focus-visible{--tw-shadow:inset 1px 1px 0 0 var(--tw-shadow-color,#fff6),inset -1px -1px 0 0 var(--tw-shadow-color,#ffffff1a),0 0 6px 1px var(--tw-shadow-color,#2eac7f61),0 0 14px 3px var(--tw-shadow-color,#2cb19347),0 0 22px 5px var(--tw-shadow-color,#f2c6772e),0 0 32px 8px var(--tw-shadow-color,#b5e9d624)!important;box-shadow:var(--tw-inset-shadow),var(--tw-inset-ring-shadow),var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)!important}
+.active\:bg-\[\#7A08CC\]\!:active{background-color:#248564!important}
+.active\:bg-\[\#CC089E\]\!:active{background-color:#248574!important}
+.active\:shadow-glass-active:active{--tw-shadow:inset 1px 1px 0 0 var(--tw-shadow-color,#fff6),inset -1px -1px 0 0 var(--tw-shadow-color,#ffffff1a),0 0 6px 1px var(--tw-shadow-color,#2eac7f7a),0 0 14px 3px var(--tw-shadow-color,#2cb19361),0 0 22px 5px var(--tw-shadow-color,#f2c67747),0 0 32px 8px var(--tw-shadow-color,#b5e9d63d)!important;box-shadow:var(--tw-inset-shadow),var(--tw-inset-ring-shadow),var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)!important}
+.sm\:shadow-\[0_12px_40px_-12px_rgba\(76\,18\,161\,0\.1\)\]{--tw-shadow:0 12px 40px -12px var(--tw-shadow-color,#246b4f1a)!important;box-shadow:var(--tw-inset-shadow),var(--tw-inset-ring-shadow),var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)!important}
+.bg-gradient-deep-gradient{background:var(--gradient-deep-gradient,linear-gradient(0deg,#e8faf3 -90.98%,#246b4f 79.56%))!important}
+.bg-gradient-hero{background:var(--gradient-hero,linear-gradient(0deg,#fbf9f7 0%,#e8faf3 46.84%,#fbf9f7 100%))!important}
+0%,to{box-shadow:inset 1px 1px #fff6,inset -1px -1px #ffffff1a,0 0 6px 1px #2eac7f61,0 0 14px 3px #2cb19347,0 0 22px 5px #f2c6772e,0 0 32px 8px #b5e9d624!important}
+50%{box-shadow:inset 1px 1px #fff6,inset -1px -1px #ffffff1a,0 0 8px 2px #2eac7f94,0 0 18px 5px #2cb19375,0 0 28px 8px #f2c6774d,0 0 40px 12px #b5e9d63d!important}
+0%,to{box-shadow:inset 1px 1px #fff6,inset -1px -1px #ffffff1a,0 0 6px 1px #2eac7f7a,0 0 14px 3px #2cb19361,0 0 22px 5px #f2c67747,0 0 32px 8px #b5e9d63d!important}
+50%{box-shadow:inset 1px 1px #fff6,inset -1px -1px #ffffff1a,0 0 8px 2px #2eac7fa6,0 0 18px 5px #2cb1938c,0 0 28px 8px #f2c67766,0 0 40px 12px #b5e9d657!important}
+.ArtieLinkPill-module__JUMPzq__pill{border:1px solid var(--color-primary-200)!important;width:fit-content!important;max-width:100%!important;color:var(--color-neutral-950)!important;font-family:var(--font-helvetica), Helvetica, Arial, sans-serif!important;letter-spacing:-.01em!important;background:#ffffffb8!important;border-radius:999px!important;align-items:baseline!important;gap:10px!important;margin-bottom:-8px!important;padding:10px 16px!important;font-size:14px!important;font-weight:400!important;line-height:1.4!important;transition:background-color .18s,border-color .18s!important;display:inline-flex!important;box-shadow:0 2px 4px #2539310a!important}
+.ArtieLinkPill-module__JUMPzq__pill:hover{background:#fff!important;border-color:#cee4da!important}
+.ArtieLinkPill-module__JUMPzq__pill:focus-visible{outline-offset:3px!important;outline:2px solid #7caf9a!important}
+
+/* ---- animated gradient words in headings ----
+   The site's script writes the gradient inline with the old ink and a
+   purple-to-pink sweep; same stops and 400% sweep here, in ink, emerald and gold. */
+.animated-gradient-text{background-image:linear-gradient(90deg,#13201b 0%,#13201b 42%,#1f4a3b 48%,#2e6b55 52%,#7fc4a6 58%,#0f6b4f 68%,#e2be55 80%,#c9a227 90%,#2e8b6a 100%)!important}
+.animated-gradient-text--light,.animated-gradient-text[style*="rgb(255, 255, 255) 0%"]{background-image:linear-gradient(90deg,#fff 0%,#fff 42%,#dcefe6 48%,#a9dcc5 52%,#7fc4a6 58%,#3fae85 68%,#ecd488 80%,#e2be55 90%,#bfe3d2 100%)!important}
